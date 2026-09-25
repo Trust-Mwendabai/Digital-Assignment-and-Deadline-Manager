@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Manage your assignments — add, edit, filter, and track deadlines with risk indicators.">
+  <title>Assignments – DeadlineDesk</title>
+  <link rel="stylesheet" href="css/styles.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+</head>
+<body data-page="assignments">
+  <header class="header" id="header">
+    <nav class="nav container">
+      <a href="index.html" class="nav__logo">
+        <span class="nav__logo-mark">DD</span>
+        <span class="nav__logo-text">DeadlineDesk</span>
+      </a>
+      <button class="nav__toggle" id="navToggle" aria-label="Toggle menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+      <ul class="nav__menu" id="navMenu">
+        <li><a href="index.html" class="nav__link" data-page="home">Home</a></li>
+        <li><a href="assignments.html" class="nav__link" data-page="assignments">Assignments</a></li>
+        <li><a href="calendar.html" class="nav__link" data-page="calendar">Calendar</a></li>
+        <li><a href="dashboard.html" class="nav__link" data-page="dashboard">Dashboard</a></li>
+      </ul>
+      <div class="nav__actions">
+        <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
+          <svg class="icon-sun" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg>
+          <svg class="icon-moon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+        </button>
+        <button class="btn btn--primary btn--sm nav__cta" id="addAssignmentBtn">+ Add Assignment</button>
+      </div>
+    </nav>
+  </header>
+
+  <main>
+    <div class="page-header">
+      <div class="container page-header__inner reveal">
+        <div>
+          <h1>Assignments</h1>
+          <p>Create, edit, and manage all your academic tasks in one place.</p>
+        </div>
+        <button class="btn btn--primary" id="addAssignmentBtn2">+ New Assignment</button>
+      </div>
+    </div>
+
+    <section class="section section--compact">
+      <div class="container">
+        <div id="riskBanner" hidden></div>
+        <div class="assignments-toolbar reveal">
+          <div class="search-box">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg>
+            <input type="search" id="searchInput" placeholder="Search assignments..." aria-label="Search assignments">
+          </div>
+          <div class="filter-group">
+            <label for="filterSubject">Subject</label>
+            <select id="filterSubject" class="filter-select" aria-label="Filter by subject">
+              <option value="all">All Subjects</option>
+            </select>
+            <label for="filterPriority">Priority</label>
+            <select id="filterPriority" class="filter-select" aria-label="Filter by priority">
+              <option value="all">All Priorities</option>
+              <option value="high">High</option>
+              <option value="medium">Medium</option>
+              <option value="low">Low</option>
+            </select>
+            <label for="filterStatus">Status</label>
+            <select id="filterStatus" class="filter-select" aria-label="Filter by status">
+              <option value="all">All Status</option>
+              <option value="pending">Pending</option>
+              <option value="completed">Completed</option>
+              <option value="overdue">Overdue</option>
+            </select>
+            <label for="sortBy">Sort</label>
+            <select id="sortBy" class="filter-select" aria-label="Sort assignments">
+              <option value="deadline-asc">Deadline (Soonest)</option>
+              <option value="deadline-desc">Deadline (Latest)</option>
+              <option value="priority">Priority</option>
+              <option value="title">Title (A-Z)</option>
+              <option value="created">Recently Added</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="assignments-grid assignments-grid--cards" id="assignmentsList"></div>
+      </div>
+    </section>
+  </main>
+
+  <div class="modal-overlay" id="assignmentModal">
+    <div class="modal" role="dialog" aria-labelledby="modalTitle">
+      <div class="modal__header">
+        <h2 id="modalTitle">Add Assignment</h2>
+        <button class="modal__close" id="modalClose" aria-label="Close modal">&times;</button>
+      </div>
+      <form id="assignmentForm">
+        <input type="hidden" id="assignmentId">
+        <div class="form-grid">
+          <div class="form-group form-group--full">
+            <label for="assignmentTitle">Title *</label>
+            <input type="text" id="assignmentTitle" required placeholder="e.g. Calculus Problem Set 4">
+          </div>
+          <div class="form-group">
+            <label for="assignmentSubject">Subject *</label>
+            <select id="assignmentSubject" required></select>
+          </div>
+          <div class="form-group">
+            <label for="assignmentPriority">Priority *</label>
+            <select id="assignmentPriority" required></select>
+          </div>
+          <div class="form-group">
+            <label for="assignmentDeadline">Deadline *</label>
+            <input type="datetime-local" id="assignmentDeadline" required>
+          </div>
+          <div class="form-group form-group--full">
+            <label for="assignmentDescription">Description</label>
+            <textarea id="assignmentDescription" placeholder="Optional notes or details..."></textarea>
+          </div>
+        </div>
+        <div class="form-actions">
+          <button type="submit" class="btn btn--primary" id="formSubmitBtn">Save Assignment</button>
+          <button type="button" class="btn btn--ghost" id="formCancelBtn">Cancel</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <footer class="footer">
+    <div class="container footer__grid">
+      <div class="footer__brand">
+        <a href="index.html" class="nav__logo">
+          <span class="nav__logo-mark">DD</span>
+          <span class="nav__logo-text">DeadlineDesk</span>
+        </a>
+        <p>Digital Assignment & Deadline Manager for students.</p>
+      </div>
+      <div class="footer__links">
+        <h4>Navigate</h4>
+        <a href="assignments.html">Assignments</a>
+        <a href="calendar.html">Calendar</a>
+        <a href="dashboard.html">Dashboard</a>
+      </div>
+      <div class="footer__links">
+        <h4>Features</h4>
+        <a href="assignments.html">Add & Edit Tasks</a>
+        <a href="calendar.html">Calendar View</a>
+        <a href="dashboard.html">Progress Stats</a>
+      </div>
+    </div>
+    <div class="footer__student container">
+      <p>AZET SIEMBE</p>
+      <small>SIN: 2511159013</small>
+    </div>
+    <div class="footer__bottom container">
+      <p>&copy; 2026 DeadlineDesk. Built with HTML, CSS & JavaScript.</p>
+    </div>
+  </footer>
+
+  <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
+  <script src="js/data.js"></script>
+  <script src="js/common.js"></script>
+  <script src="js/assignments.js"></script>
+</body>
+</html>

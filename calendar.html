@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="View your assignment deadlines on an interactive monthly calendar.">
+  <title>Calendar – DeadlineDesk</title>
+  <link rel="stylesheet" href="css/styles.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+</head>
+<body data-page="calendar">
+  <header class="header" id="header">
+    <nav class="nav container">
+      <a href="index.html" class="nav__logo">
+        <span class="nav__logo-mark">DD</span>
+        <span class="nav__logo-text">DeadlineDesk</span>
+      </a>
+      <button class="nav__toggle" id="navToggle" aria-label="Toggle menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+      <ul class="nav__menu" id="navMenu">
+        <li><a href="index.html" class="nav__link" data-page="home">Home</a></li>
+        <li><a href="assignments.html" class="nav__link" data-page="assignments">Assignments</a></li>
+        <li><a href="calendar.html" class="nav__link" data-page="calendar">Calendar</a></li>
+        <li><a href="dashboard.html" class="nav__link" data-page="dashboard">Dashboard</a></li>
+      </ul>
+      <div class="nav__actions">
+        <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
+          <svg class="icon-sun" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg>
+          <svg class="icon-moon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+        </button>
+        <a href="assignments.html" class="btn btn--primary btn--sm nav__cta">Add Assignment</a>
+      </div>
+    </nav>
+  </header>
+
+  <main>
+    <div class="page-header">
+      <div class="container page-header__inner reveal">
+        <div>
+          <h1>Calendar</h1>
+          <p>See all your assignment deadlines laid out by due date.</p>
+        </div>
+        <a href="assignments.html" class="btn btn--outline">Manage Assignments</a>
+      </div>
+    </div>
+
+    <section class="section section--compact">
+      <div class="container">
+        <div class="calendar-nav reveal">
+          <button class="btn btn--secondary btn--icon" id="prevMonth" aria-label="Previous month">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 18l-6-6 6-6"/></svg>
+          </button>
+          <h2 id="calendarTitle">September 2026</h2>
+          <button class="btn btn--secondary btn--icon" id="nextMonth" aria-label="Next month">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18l6-6-6-6"/></svg>
+          </button>
+        </div>
+        <button class="btn btn--ghost btn--sm" id="todayBtn" style="display:block;margin:0 auto 1.5rem;">Go to Today</button>
+
+        <div class="calendar-grid" id="calendarWeekdays"></div>
+        <div class="calendar-grid" id="calendarGrid"></div>
+
+        <div class="calendar-legend reveal">
+          <span class="calendar-legend__item"><span class="calendar-legend__dot" style="background:#991b1b"></span> Overdue</span>
+          <span class="calendar-legend__item"><span class="calendar-legend__dot" style="background:#dc2626"></span> Critical (&lt;24h)</span>
+          <span class="calendar-legend__item"><span class="calendar-legend__dot" style="background:#ea580c"></span> High (&lt;3 days)</span>
+          <span class="calendar-legend__item"><span class="calendar-legend__dot" style="background:#d97706"></span> Medium (&lt;7 days)</span>
+          <span class="calendar-legend__item"><span class="calendar-legend__dot" style="background:#059669"></span> Low (&gt;7 days)</span>
+          <span class="calendar-legend__item"><span class="calendar-legend__dot" style="background:#6366f1"></span> Completed</span>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="container footer__grid">
+      <div class="footer__brand">
+        <a href="index.html" class="nav__logo">
+          <span class="nav__logo-mark">DD</span>
+          <span class="nav__logo-text">DeadlineDesk</span>
+        </a>
+        <p>Digital Assignment & Deadline Manager for students.</p>
+      </div>
+      <div class="footer__links">
+        <h4>Navigate</h4>
+        <a href="assignments.html">Assignments</a>
+        <a href="calendar.html">Calendar</a>
+        <a href="dashboard.html">Dashboard</a>
+      </div>
+      <div class="footer__links">
+        <h4>Features</h4>
+        <a href="assignments.html">Add & Edit Tasks</a>
+        <a href="calendar.html">Calendar View</a>
+        <a href="dashboard.html">Progress Stats</a>
+      </div>
+    </div>
+    <div class="footer__student container">
+      <p>AZET SIEMBE</p>
+      <small>SIN: 2511159013</small>
+    </div>
+    <div class="footer__bottom container">
+      <p>&copy; 2026 DeadlineDesk. Built with HTML, CSS & JavaScript.</p>
+    </div>
+  </footer>
+
+  <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
+  <script src="js/data.js"></script>
+  <script src="js/common.js"></script>
+  <script src="js/calendar.js"></script>
+</body>
+</html>

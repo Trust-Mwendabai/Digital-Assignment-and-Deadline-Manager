@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="DeadlineDesk – Manage assignments, track deadlines, and stay on top of your academic workload.">
+  <title>DeadlineDesk – Assignment & Deadline Manager</title>
+  <link rel="stylesheet" href="css/styles.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+</head>
+<body data-page="home">
+  <header class="header" id="header">
+    <nav class="nav container">
+      <a href="index.html" class="nav__logo">
+        <span class="nav__logo-mark">DD</span>
+        <span class="nav__logo-text">DeadlineDesk</span>
+      </a>
+      <button class="nav__toggle" id="navToggle" aria-label="Toggle menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+      <ul class="nav__menu" id="navMenu">
+        <li><a href="index.html" class="nav__link" data-page="home">Home</a></li>
+        <li><a href="assignments.html" class="nav__link" data-page="assignments">Assignments</a></li>
+        <li><a href="calendar.html" class="nav__link" data-page="calendar">Calendar</a></li>
+        <li><a href="dashboard.html" class="nav__link" data-page="dashboard">Dashboard</a></li>
+      </ul>
+      <div class="nav__actions">
+        <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
+          <svg class="icon-sun" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg>
+          <svg class="icon-moon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+        </button>
+        <a href="assignments.html" class="btn btn--primary btn--sm nav__cta">Add Assignment</a>
+      </div>
+    </nav>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="hero__mesh"></div>
+      <div class="container hero__inner">
+        <div class="hero__content reveal">
+          <div class="hero__badge">
+            <span class="hero__badge-dot"></span>
+            Built for Students
+          </div>
+          <h1 class="hero__title">
+            Master Your <span class="gradient-text">Deadlines</span> with Confidence
+          </h1>
+          <p class="hero__desc">
+            Track assignments, monitor risk levels, and never miss a submission again — all free, private, and saved right in your browser.
+          </p>
+          <div class="hero__actions">
+            <a href="assignments.html" class="btn btn--primary btn--lg">
+              Manage Assignments
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+            </a>
+            <a href="dashboard.html" class="btn btn--ghost btn--lg">View Dashboard</a>
+          </div>
+          <div class="hero__stats" id="heroStats">
+            <div class="hero__stat">
+              <span class="hero__stat-num" id="statTotal">0</span>
+              <span class="hero__stat-label">Total Assignments</span>
+            </div>
+            <div class="hero__stat">
+              <span class="hero__stat-num" id="statPending">0</span>
+              <span class="hero__stat-label">Pending</span>
+            </div>
+            <div class="hero__stat">
+              <span class="hero__stat-num" id="statRate">0%</span>
+              <span class="hero__stat-label">Completion Rate</span>
+            </div>
+          </div>
+        </div>
+        <div class="hero__visual reveal">
+          <div class="hero__card-stack">
+            <div class="hero__float-card hero__float-card--1">
+              <span><i data-lucide="ruler"></i></span>
+              <div><strong>Calculus Problem Set</strong><small>Due in 18h — Critical</small></div>
+            </div>
+            <div class="hero__float-card hero__float-card--2">
+              <span><i data-lucide="laptop"></i></span>
+              <div><strong>Web Dev Project</strong><small>Due in 2 days — High Risk</small></div>
+            </div>
+            <div class="hero__float-card hero__float-card--3">
+              <span><i data-lucide="book-open"></i></span>
+              <div><strong>Literature Essay</strong><small>Due in 5 days — Medium</small></div>
+            </div>
+            <div class="hero__glow"></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section section--alt">
+      <div class="container">
+        <div class="section-head reveal">
+          <span class="section-label">Features</span>
+          <h2 class="section-title">Everything You Need to Stay Organized</h2>
+          <p class="section-desc">Powerful tools designed specifically for academic deadline management</p>
+        </div>
+        <div class="features-grid">
+          <article class="feature-card reveal">
+            <div class="feature-card__icon"><i data-lucide="clipboard-list"></i></div>
+            <h3>Assignment Management</h3>
+            <p>Add, edit, and organize assignments by subject, priority, and deadline with full CRUD support.</p>
+          </article>
+          <article class="feature-card reveal">
+            <div class="feature-card__icon"><i data-lucide="alert-triangle"></i></div>
+            <h3>Deadline Risk Indicator</h3>
+            <p>Visual risk levels — critical, high, medium, low, and overdue — so you always know what needs attention first.</p>
+          </article>
+          <article class="feature-card reveal">
+            <div class="feature-card__icon"><i data-lucide="timer"></i></div>
+            <h3>Live Countdown Timers</h3>
+            <p>Real-time countdowns on every assignment show exactly how much time remains before each deadline.</p>
+          </article>
+          <article class="feature-card reveal">
+            <div class="feature-card__icon"><i data-lucide="calendar"></i></div>
+            <h3>Calendar View</h3>
+            <p>See all your due dates laid out on a monthly calendar with color-coded risk indicators.</p>
+          </article>
+          <article class="feature-card reveal">
+            <div class="feature-card__icon"><i data-lucide="bar-chart-3"></i></div>
+            <h3>Progress Dashboard</h3>
+            <p>Track completion statistics, subject progress bars, and upcoming deadlines at a glance.</p>
+          </article>
+          <article class="feature-card reveal">
+            <div class="feature-card__icon"><i data-lucide="bell"></i></div>
+            <h3>Deadline Alerts</h3>
+            <p>Notification-style alerts warn you when assignments are overdue or approaching critical status.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container">
+        <div class="section-head reveal">
+          <span class="section-label">How It Works</span>
+          <h2 class="section-title">Three Steps to Academic Success</h2>
+          <p class="section-desc">Get organized in minutes — no account required</p>
+        </div>
+        <div class="steps-grid">
+          <article class="step-card reveal">
+            <div class="step-card__num">01</div>
+            <div class="step-card__icon"><i data-lucide="plus-circle"></i></div>
+            <h3>Add Assignments</h3>
+            <p>Create assignments with subjects, priorities, and deadlines. Everything saves automatically to your browser.</p>
+            <a href="assignments.html" class="step-card__link">Add your first task →</a>
+          </article>
+          <article class="step-card reveal">
+            <div class="step-card__num">02</div>
+            <div class="step-card__icon"><i data-lucide="calendar"></i></div>
+            <h3>Track on Calendar</h3>
+            <p>View all due dates on an interactive calendar and spot busy weeks before they overwhelm you.</p>
+            <a href="calendar.html" class="step-card__link">Open calendar →</a>
+          </article>
+          <article class="step-card reveal">
+            <div class="step-card__num">03</div>
+            <div class="step-card__icon"><i data-lucide="trending-up"></i></div>
+            <h3>Monitor Progress</h3>
+            <p>Use the dashboard to track completion rates, subject progress, and receive deadline alerts.</p>
+            <a href="dashboard.html" class="step-card__link">View dashboard →</a>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section section--alt">
+      <div class="container">
+        <div class="section-head reveal">
+          <span class="section-label">Quick Overview</span>
+          <h2 class="section-title">Your Current Status</h2>
+        </div>
+        <div class="stats-grid" id="homeStatsGrid"></div>
+      </div>
+    </section>
+
+    <section class="section cta-section">
+      <div class="container">
+        <div class="cta-banner reveal">
+          <h2>Ready to take control of your deadlines?</h2>
+          <p>No sign-up required. Your assignments save automatically in your browser.</p>
+          <div class="cta-banner__actions">
+            <a href="assignments.html" class="btn btn--white btn--lg">Start Managing Tasks</a>
+            <a href="dashboard.html" class="btn btn--outline-white btn--lg">View Dashboard</a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="container footer__grid">
+      <div class="footer__brand">
+        <a href="index.html" class="nav__logo">
+          <span class="nav__logo-mark">DD</span>
+          <span class="nav__logo-text">DeadlineDesk</span>
+        </a>
+        <p>Digital Assignment & Deadline Manager for students.</p>
+      </div>
+      <div class="footer__links">
+        <h4>Navigate</h4>
+        <a href="assignments.html">Assignments</a>
+        <a href="calendar.html">Calendar</a>
+        <a href="dashboard.html">Dashboard</a>
+      </div>
+      <div class="footer__links">
+        <h4>Features</h4>
+        <a href="assignments.html">Add & Edit Tasks</a>
+        <a href="calendar.html">Calendar View</a>
+        <a href="dashboard.html">Progress Stats</a>
+      </div>
+    </div>
+    <div class="footer__student container">
+      <p>AZET SIEMBE</p>
+      <small>SIN: 2511159013</small>
+    </div>
+    <div class="footer__bottom container">
+      <p>&copy; 2026 DeadlineDesk. Built with HTML, CSS & JavaScript.</p>
+    </div>
+  </footer>
+
+  <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
+  <script src="js/data.js"></script>
+  <script src="js/common.js"></script>
+  <script src="js/home.js"></script>
+</body>
+</html>
