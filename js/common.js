@@ -31,7 +31,11 @@ const DeadlineDesk = (function () {
   }
 
   function saveState() {
-    localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+    try {
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+    } catch (err) {
+      console.warn('DeadlineDesk: could not save to localStorage', err);
+    }
   }
 
   function getState() { return state; }
@@ -446,6 +450,7 @@ const DeadlineDesk = (function () {
     renderSubjectTag,
     renderPriorityTag,
     initCountdowns,
+    initScrollAnimations,
     initBase,
     isSameDay,
     startOfDay

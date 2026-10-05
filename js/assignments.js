@@ -21,16 +21,25 @@
 
   function populateFilters() {
     SUBJECTS.forEach((s) => {
-      filterSubject.innerHTML += `<option value="${s.id}">${s.name}</option>`;
+      const opt = document.createElement('option');
+      opt.value = s.id;
+      opt.textContent = s.name;
+      filterSubject.appendChild(opt);
     });
 
     const subjectSelect = DD.$('#assignmentSubject');
     const prioritySelect = DD.$('#assignmentPriority');
     SUBJECTS.forEach((s) => {
-      subjectSelect.innerHTML += `<option value="${s.id}">${s.name}</option>`;
+      const opt = document.createElement('option');
+      opt.value = s.id;
+      opt.textContent = s.name;
+      subjectSelect.appendChild(opt);
     });
     PRIORITIES.forEach((p) => {
-      prioritySelect.innerHTML += `<option value="${p.id}">${p.label}</option>`;
+      const opt = document.createElement('option');
+      opt.value = p.id;
+      opt.textContent = p.label;
+      prioritySelect.appendChild(opt);
     });
   }
 
@@ -171,26 +180,60 @@
   }
 
   function openModal(assignment = null) {
+    console.log('openModal called', { assignment });
     editingId = assignment ? assignment.id : null;
-    DD.$('#modalTitle').textContent = assignment ? 'Edit Assignment' : 'Add Assignment';
-    DD.$('#formSubmitBtn').textContent = assignment ? 'Update Assignment' : 'Save Assignment';
-    DD.$('#assignmentId').value = assignment ? assignment.id : '';
-    DD.$('#assignmentTitle').value = assignment ? assignment.title : '';
-    DD.$('#assignmentSubject').value = assignment ? assignment.subject : SUBJECTS[0].id;
-    DD.$('#assignmentPriority').value = assignment ? assignment.priority : 'medium';
 
-    if (assignment) {
-      DD.$('#assignmentDeadline').value = toLocalDatetime(assignment.deadline);
-    } else {
-      const tomorrow = new Date();
-      tomorrow.setDate(tomorrow.getDate() + 1);
-      tomorrow.setHours(23, 59, 0, 0);
-      DD.$('#assignmentDeadline').value = toLocalDatetime(tomorrow.toISOString());
+    const modalTitle = DD.$('#modalTitle');
+    const formSubmitBtn = DD.$('#formSubmitBtn');
+    const assignmentId = DD.$('#assignmentId');
+    const assignmentTitle = DD.$('#assignmentTitle');
+    const assignmentSubject = DD.$('#assignmentSubject');
+    const assignmentPriority = DD.$('#assignmentPriority');
+    const assignmentDeadline = DD.$('#assignmentDeadline');
+    const assignmentDescription = DD.$('#assignmentDescription');
+
+    console.log('Form elements found:', {
+      modalTitle: !!modalTitle,
+      formSubmitBtn: !!formSubmitBtn,
+      assignmentTitle: !!assignmentTitle,
+      assignmentSubject: !!assignmentSubject,
+      assignmentPriority: !!assignmentPriority,
+      assignmentDeadline: !!assignmentDeadline,
+      assignmentDescription: !!assignmentDescription,
+      modal: !!modal
+    });
+
+    if (modalTitle) modalTitle.textContent = assignment ? 'Edit Assignment' : 'Add Assignment';
+    if (formSubmitBtn) formSubmitBtn.textContent = assignment ? 'Update Assignment' : 'Save Assignment';
+    if (assignmentId) assignmentId.value = assignment ? assignment.id : '';
+    if (assignmentTitle) assignmentTitle.value = assignment ? assignment.title : '';
+    if (assignmentSubject) assignmentSubject.value = assignment ? assignment.subject : SUBJECTS[0].id;
+    if (assignmentPriority) assignmentPriority.value = assignment ? assignment.priority : 'medium';
+
+    if (assignmentDeadline) {
+      if (assignment) {
+        assignmentDeadline.value = toLocalDatetime(assignment.deadline);
+      } else {
+        const tomorrow = new Date();
+        tomorrow.setDate(tomorrow.getDate() + 1);
+        tomorrow.setHours(23, 59, 0, 0);
+        assignmentDeadline.value = toLocalDatetime(tomorrow.toISOString());
+      }
     }
 
-    DD.$('#assignmentDescription').value = assignment ? (assignment.description || '') : '';
-    modal.classList.add('open');
-    DD.$('#assignmentTitle').focus();
+    if (assignmentDescription) assignmentDescription.value = assignment ? (assignment.description || '') : '';
+
+    if (modal) {
+      console.log('Adding open class to modal');
+      modal.classList.add('open');
+    } else {
+      console.error('Modal element not found!');
+    }
+
+    if (assignmentTitle) {
+      assignmentTitle.focus();
+      console.log('Focus set to title input');
+    }
   }
 
   function closeModal() {
@@ -254,12 +297,41 @@
   filterStatus.addEventListener('change', renderList);
   sortBy.addEventListener('change', renderList);
 
-  DD.$('#addAssignmentBtn')?.addEventListener('click', () => openModal());
-  DD.$('#addAssignmentBtn2')?.addEventListener('click', () => openModal());
-  DD.$('#modalClose')?.addEventListener('click', closeModal);
-  DD.$('#formCancelBtn')?.addEventListener('click', closeModal);
-  modal.addEventListener('click', (e) => { if (e.target === modal) closeModal(); });
+  const btn1 = DD.$('#addAssignmentBtn');
+  const btn2 = DD.$('#addAssignmentBtn2');
+  const closeBtn = DD.$('#modalClose');
+  const cancelBtn = DD.$('#formCancelBtn');
+
+  if (btn1) btn1.addEventListener('click', () => {
+    console.log('Button 1 clicked, opening modal');
+    openModal();
+  });
+  if (btn2) btn2.addEventListener('click', () => {
+    console.log('Button 2 clicked, opening modal');
+    openModal();
+  });
+  if (closeBtn) closeBtn.addEventListener('click', () => {
+    console.log('Close button clicked');
+    closeModal();
+  });
+  if (cancelBtn) cancelBtn.addEventListener('click', () => {
+    console.log('Cancel button clicked');
+    closeModal();
+  });
+
+  if (modal) {
+    modal.addEventListener('click', (e) => {
+      if (e.target === modal) {
+        console.log('Modal overlay clicked');
+        closeModal();
+      }
+    });
+  }
+
   document.addEventListener('keydown', (e) => {
-    if (e.key === 'Escape' && modal.classList.contains('open')) closeModal();
+    if (e.key === 'Escape' && modal && modal.classList.contains('open')) {
+      console.log('Escape key pressed, closing modal');
+      closeModal();
+    }
   });
 })();
